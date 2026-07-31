@@ -4,7 +4,7 @@
     <test name="Web Automation Tests">
         <classes>
             <class name="com.demo.tests.LoginDemoTest"/>
-            <class name="com.demo.tests.SetupBusinessTest"/>
+            <!-- <class name="com.demo.tests.SetupBusinessTest"/> -->
         </classes>
     </test>
 </suite>

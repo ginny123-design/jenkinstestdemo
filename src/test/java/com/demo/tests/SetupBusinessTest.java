@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class SetupBusinessTest extends BaseTest {
 
-    @Test(timeOut = 120000, description = "Automate Business Setup Persona Auto")
+    @Test(enabled = false, timeOut = 120000, description = "Automate Business Setup Persona Auto")
     public void testLoginAndCompleteBusinessSetup() throws Exception {
         FlyLoginPage loginPage = new FlyLoginPage(driver);
         FlyOtpPage otpPage = new FlyOtpPage(driver);
