@@ -19,10 +19,10 @@ pipeline {
                 @echo off
                 IF EXIST "mvnw.cmd" (
                     echo Found Maven Wrapper. Running via mvnw.cmd...
-                    call mvnw.cmd clean test -DsuiteXmlFile=testng.xml
+                    call mvnw.cmd clean test -DsuiteXmlFile=testng.xml -Dheadless=true
                 ) ELSE (
                     echo Running via system mvn...
-                    mvn clean test -DsuiteXmlFile=testng.xml
+                    mvn clean test -DsuiteXmlFile=testng.xml -Dheadless=true
                 )
                 '''
             }

@@ -18,9 +18,13 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         
-        String headlessEnv = System.getProperty("headless", "false");
+        String headlessEnv = System.getProperty("headless", "true");
         if (Boolean.parseBoolean(headlessEnv)) {
             options.addArguments("--headless=new");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
         }
         
         options.addArguments("--start-maximized");
