@@ -9,37 +9,27 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out code...'
-                // Code is checked out automatically by Jenkins SCMS/Workspace
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Build & Run Maven TestNG Tests') {
             steps {
-                echo 'Installing Node.js dependencies...'
-                bat 'npm install'
-                echo 'Installing Playwright browsers...'
-                bat 'npx playwright install chromium'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                echo 'Running Playwright Automation Tests...'
-                bat 'npx playwright test'
+                echo 'Executing Maven TestNG Automation Suite...'
+                bat 'mvn clean test -DsuiteXmlFile=testng.xml'
             }
         }
     }
 
     post {
         always {
-            echo 'Archiving test results...'
-            archiveArtifacts artifacts: 'playwright-report/**, test-results/**', allowEmptyArchive: true
+            echo 'Archiving test reports and screenshots...'
+            archiveArtifacts artifacts: 'target/surefire-reports/**, test-results/screenshots/**', allowEmptyArchive: true
         }
         success {
-            echo 'Build and automation tests completed successfully!'
+            echo 'Build and TestNG automation suite completed successfully!'
         }
         failure {
-            echo 'Build or automation tests failed. Check logs for details.'
+            echo 'Build or TestNG automation suite failed. Check surefire reports for details.'
         }
     }
 }
