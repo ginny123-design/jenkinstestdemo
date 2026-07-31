@@ -32,6 +32,7 @@ pipeline {
     post {
         always {
             echo 'Publishing TestNG & Surefire test results...'
+            testng reportFilenamePattern: 'target/surefire-reports/testng-results.xml'
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 
             echo 'Archiving test reports and screenshots...'
