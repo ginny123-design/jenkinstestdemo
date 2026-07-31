@@ -15,7 +15,16 @@ pipeline {
         stage('Build & Run Maven TestNG Tests') {
             steps {
                 echo 'Executing Maven TestNG Automation Suite...'
-                bat 'mvn clean test -DsuiteXmlFile=testng.xml'
+                bat '''
+                @echo off
+                IF EXIST "mvnw.cmd" (
+                    echo Found Maven Wrapper. Running via mvnw.cmd...
+                    call mvnw.cmd clean test -DsuiteXmlFile=testng.xml
+                ) ELSE (
+                    echo Running via system mvn...
+                    mvn clean test -DsuiteXmlFile=testng.xml
+                )
+                '''
             }
         }
     }
